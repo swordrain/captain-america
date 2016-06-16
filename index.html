@@ -1,0 +1,70 @@
+<style>
+body{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: #0E2038;
+}
+</style>
+<canvas id="canvas" width=400 height=400>
+
+
+
+
+</canvas>
+
+<script>
+	var context = document.getElementById("canvas").getContext("2d");
+	function draw5PointsStar(x, y, r){ //(x, y) is origin point location , r is radius
+		var points = [];
+		points.push({
+			x: x,
+			y: y - r
+		});
+		points.push({
+			x: x + r * Math.sin(Math.PI / 5),
+			y: y + r * Math.cos(Math.PI / 5)
+		});
+		points.push({
+			x: x - r * Math.cos(Math.PI / 10),
+			y: y - r * Math.sin(Math.PI / 10)
+		});
+		points.push({
+			x: x + r * Math.cos(Math.PI / 10),
+			y: y - r * Math.sin(Math.PI / 10)
+		});
+		points.push({
+			x: x - r * Math.sin(Math.PI / 5),
+			y: y + r * Math.cos(Math.PI / 5)
+		});
+		context.beginPath(); 
+		context.moveTo(points[4].x, points[4].y);
+		for(var i in points){
+			context.lineTo(points[i].x, points[i].y);
+		}
+		context.fillStyle = "white";
+		context.closePath();  
+		context.fill(); 
+
+	}
+	function prepareCanvas(){
+		context.fillStyle = "#0E2038";
+		context.fillRect(0, 0, 400, 400);
+	}
+	function drawCircle(x, y, r, borderWidth, color) {
+		context.beginPath();
+		context.lineWidth = borderWidth;
+		context.strokeStyle = color;
+		context.arc(x, y, r, 0, Math.PI * 2);
+		context.stroke();
+
+	}
+
+	
+	prepareCanvas();
+	drawCircle(200, 200, 180, 20, "#EE1C1F");
+	drawCircle(200, 200, 155, 30, "white");
+	drawCircle(200, 200, 130, 25, "#EE1C1F");
+	draw5PointsStar(200, 200, 100);
+
+</script>>
